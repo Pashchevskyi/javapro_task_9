@@ -55,7 +55,7 @@ public class FileLogger extends Logger {
         if (strLog.matches(flc.getFormat())) {
           w.append(strLog);
         }
-      } catch (IOException e ) {
+      } catch (IOException e) {
         System.out.println(e.getMessage());
       }
     }
