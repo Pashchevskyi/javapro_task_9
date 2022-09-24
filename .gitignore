@@ -29,3 +29,8 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### Generated files ###
+/config/*
+!/config/*.sample.*
+/log/*
