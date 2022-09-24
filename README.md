@@ -25,7 +25,7 @@ Note: level "debug" contains level "info").
 
 MAX-SIZE - integer value, which is number of bytes - maximum allowed size of log file.
 
-FORMAT - regular expression for LOG file formatting (now is not used)
+FORMAT - regular expression for LOG file formatting
 
 Configuration example is situated in "./config/logs.sample.ini" file of the Project.
 

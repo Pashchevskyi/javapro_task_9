@@ -51,8 +51,11 @@ public class FileLogger extends Logger {
         System.out.println(e.getMessage());
       }
       try (Writer w = new FileWriter(fileObj, true)) {
-        w.append(sb.toString());
-      } catch (IOException e) {
+        String strLog = sb.toString();
+        if (strLog.matches(flc.getFormat())) {
+          w.append(strLog);
+        }
+      } catch (IOException e ) {
         System.out.println(e.getMessage());
       }
     }

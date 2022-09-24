@@ -9,4 +9,8 @@ public abstract class LoggerConfiguration {
     level = ll;
     format = lf;
   }
+
+  public String getFormat() {
+    return format;
+  }
 }
