@@ -50,7 +50,10 @@ public class FileLogger extends Logger {
               oldLogName.substring(0, oldLogName.indexOf("."))) + '-';
 
           DateTimeFormatter logNameDTF = DateTimeFormatter.ofPattern("yyyy-MM-dd_HHmmss");
-          String strLogName = newLogNameBeginning + logNameDTF.format(LocalDateTime.now()) + ".txt";
+          String newLogFileSuffix = (oldLogName.contains(".")) ?
+              oldLogName.substring(oldLogName.indexOf(".")) : "";
+          String strLogName = newLogNameBeginning + logNameDTF.format(LocalDateTime.now()) +
+              newLogFileSuffix;
           fileObj = new File(dirObj, strLogName);
         }
       } catch (IOException e) {
