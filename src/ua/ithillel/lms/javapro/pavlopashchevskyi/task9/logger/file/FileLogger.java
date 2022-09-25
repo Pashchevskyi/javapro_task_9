@@ -43,8 +43,14 @@ public class FileLogger extends Logger {
         Arrays.sort(files, Comparator.comparingLong(File::lastModified).reversed());
         fileObj = (files.length > 0) ? files[0] : new File(filePath);
         if (fileObj.length() >= confMaxSize) {
+          String oldLogName = fileObj.getName();
+          String newLogNameBeginning = (!oldLogName.contains(".") && !oldLogName.contains("-")) ?
+              oldLogName : (oldLogName.contains("-") ?
+              oldLogName.substring(0, oldLogName.indexOf("-")) :
+              oldLogName.substring(0, oldLogName.indexOf("."))) + '-';
+
           DateTimeFormatter logNameDTF = DateTimeFormatter.ofPattern("yyyy-MM-dd_HHmmss");
-          String strLogName = "log-" + logNameDTF.format(LocalDateTime.now()) + ".txt";
+          String strLogName = newLogNameBeginning + logNameDTF.format(LocalDateTime.now()) + ".txt";
           fileObj = new File(dirObj, strLogName);
         }
       } catch (IOException e) {
