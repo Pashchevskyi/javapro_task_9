@@ -3,11 +3,13 @@ package ua.ithillel.lms.javapro.pavlopashchevskyi.task9.logger.file;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.Locale;
 import java.util.Properties;
-import ua.ithillel.lms.javapro.pavlopashchevskyi.task9.logger.LoggingLevel;
-import ua.ithillel.lms.javapro.pavlopashchevskyi.task9.logger.api.Loadable;
 
-public class FileLoggerConfigurationLoader implements Loadable {
+import ua.ithillel.lms.javapro.pavlopashchevskyi.task9.logger.LoggerConfigurationLoader;
+import ua.ithillel.lms.javapro.pavlopashchevskyi.task9.logger.LoggingLevel;
+
+public class FileLoggerConfigurationLoader extends LoggerConfigurationLoader {
 
   public FileLoggerConfiguration load(String path) throws IOException {
     try (Reader reader = new FileReader(path)) {
@@ -15,8 +17,12 @@ public class FileLoggerConfigurationLoader implements Loadable {
       prop.load(reader);
 
       String filePath = prop.getProperty("log.file.path", "./log/log.txt");
-      LoggingLevel loggingLevel = (prop.getProperty("log.file.level", "info").
-          equalsIgnoreCase("debug")) ? LoggingLevel.DEBUG : LoggingLevel.INFO;
+      String loggingLevelFromConfig = prop.getProperty("log.file.level", "info").trim()
+          .toLowerCase(Locale.ROOT);
+      if (!supportingLoggingLevels.containsKey(loggingLevelFromConfig)) {
+        loggingLevelFromConfig = "info";
+      }
+      LoggingLevel loggingLevel = supportingLoggingLevels.get(loggingLevelFromConfig);
       String strMaxSize = prop.getProperty("log.file.max_size", "256");
 
       int maxSize;
@@ -26,7 +32,7 @@ public class FileLoggerConfigurationLoader implements Loadable {
         maxSize = 256;
       }
 
-      String defaultFormat = "^\\[[0-9]{4}-[0-1][0-9]-[0-3][0-9]\\s[0-2][0-9]:[0-5][0-9]:[0-5][0-9]\\]\\[(DEBUG|INFO|ERROR|TRACE)\\]\\sMessage:\\s\\[.*\\]\\n$";
+      String defaultFormat = "^\\[[0-9]{4}-[0-1][0-9]-[0-3][0-9]\\s[0-2][0-9]:[0-5][0-9]:[0-5][0-9]\\]\\[(DEBUG|INFO|ERROR|TRACE|WARN)\\]\\sMessage:\\s\\[.*\\]\\n$";
       String format = prop.getProperty("log.file.format", defaultFormat);
 
       return new FileLoggerConfiguration(loggingLevel, format, filePath, maxSize);

@@ -15,8 +15,7 @@ Meaning of configuration parameters:
 
 log.file.path - path to log file
 
-log.file.level - which kind of messages will be logged (now "debug" and "info" is supported.
-Note: level "debug" contains level "info").
+log.file.level - which kind of messages will be logged.
 
 log.file.max_size - integer value, which is number of bytes - maximum allowed size of log file.
 
@@ -33,7 +32,7 @@ package ua.ithillel.lms;
 import java.io.IOException;
 import ua.ithillel.lms.javapro.pavlopashchevskyi.task9.logger.Logger;
 import ua.ithillel.lms.javapro.pavlopashchevskyi.task9.logger.LoggerConfiguration;
-import ua.ithillel.lms.javapro.pavlopashchevskyi.task9.logger.api.Loadable;
+import ua.ithillel.lms.javapro.pavlopashchevskyi.task9.logger.LoggingLevel.Loadable;
 import ua.ithillel.lms.javapro.pavlopashchevskyi.task9.logger.file.FileLogger;
 import ua.ithillel.lms.javapro.pavlopashchevskyi.task9.logger.file.FileLoggerConfiguration;
 import ua.ithillel.lms.javapro.pavlopashchevskyi.task9.logger.file.FileLoggerConfigurationLoader;
