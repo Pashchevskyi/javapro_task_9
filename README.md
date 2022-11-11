@@ -25,6 +25,9 @@ Configuration example is situated in "./config/log.sample.properties" file of th
 
 To run project, please, rename "./config/logs.sample.ini" to "./config/logs.ini".
 
+If you do not have directory and/or *.properties file you would like to put configuration options,
+file will be created automatically.
+
 Example of usage:
 
 package ua.ithillel.lms;

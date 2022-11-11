@@ -1,6 +1,5 @@
 package ua.ithillel.lms.javapro.pavlopashchevskyi.task9.logger;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,5 +15,5 @@ public abstract class LoggerConfigurationLoader {
     supportingLoggingLevels.put("trace", LoggingLevel.TRACE);
   }
 
-  public abstract LoggerConfiguration load(String str) throws IOException;
+  public abstract LoggerConfiguration load(String str);
 }
